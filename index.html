@@ -7,10 +7,10 @@
     <meta name="theme-color" content="#4fc3f7"/>
     <title>Box Keeper</title>
     <link rel="manifest" href="/manifest.json">
-    <script src="App.js"></script>
+    <script src="/js/App.js"></script>
 
     <!-- Import App.css -->
-    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="/css/app.css">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!--Import Google Icon Font-->
@@ -93,26 +93,7 @@
             $('.sidenav').sidenav();
         });
     </script>
-
     <!-- Firebase import code-->
-    <script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-  
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyAXs5EqmXzHzw49sUOrgFE-4B2q83qePPg",
-      authDomain: "boxes-d9710.firebaseapp.com",
-      projectId: "boxes-d9710",
-      storageBucket: "boxes-d9710.appspot.com",
-      messagingSenderId: "21099836371",
-      appId: "1:21099836371:web:b81cba976511f42386b526"
-    };
-  
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-  </script>
+    <script type="module" src="/js/db.js"></script>
 </body>
 </html>
