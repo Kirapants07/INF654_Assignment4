@@ -4,8 +4,8 @@ const dynamicCache = 'Dynamic-cache-v1';
 const assets = [
     "/",
     "/index.html",
-    "/App.js",
-    "/app.css",
+    "/js/App.js",
+    "/css/app.css",
     "/pages/about.html",
     "/pages/dashboard.html",
     "/pages/login.html",
@@ -32,7 +32,7 @@ self.addEventListener("install", function (event) {
     console.log(`Event fired: ${event.type}`);
     event.waitUntil(
         caches.open(staticCache).then(function (cache){
-            console.log("SW: Precaching App shell");
+            // console.log("SW: Precaching App shell");
             cache.addAll(assets);
         })
     );
