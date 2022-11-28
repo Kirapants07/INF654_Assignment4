@@ -24,13 +24,7 @@ async function getBoxes(db){
     return BoxList;
 }
 
-
-// getBoxes(db).then((docs) => {
-//     docs.forEach((doc) => {
-//         render(doc);
-//     });
-// });
-
+//check for changes to collection and re-render when changes occur
 const unsub = onSnapshot(collection(db, "Box"), (doc) =>{
     //console.log(doc.docChanges());
     doc.docChanges().forEach((change) => {
@@ -44,4 +38,21 @@ const unsub = onSnapshot(collection(db, "Box"), (doc) =>{
         }
     });
 });
+
+//add new task
+const boxmodal = document.querySelector("form");
+boxmodal.addEventListener("submit", (event) => {
+    event.preventDefault();
+    addDoc(collection(db, "Box"), {
+        name: boxmodal.name.value,
+        items: boxmodal.items.value,
+        // categories: boxmodal.categories.value,
+    }).catch((error) => console.log(error));
+    //clear text fields
+    boxmodal.name.value="";
+    boxmodal.items.value="";
+    // boxmodal.categories.value="";
+});
+
+//delete task
 

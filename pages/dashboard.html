@@ -79,20 +79,7 @@
             <div class = "row">
 
             <div class="boxes container">
-                <div class="col l3 m4 s6">
-                    <div class="card hoverable yellow lighten-4">
-                        <div class="card-content blue-grey-text">
-                            <span class="card-title">Sample Box 1</span>
-                            <p class="truncate" id="container"></p>
-                        </div>
-                        <div class="card-action">
-                            <div class="row">
-                                <a class="tooltipped" data-position="top" data-tooltip="edit"><i class="material-icons teal-text">edit</i></a>
-                                <a class="tooltipped right" data-position="top" data-tooltip="delete"><i class="material-icons teal-text">delete</i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Boxes populate here -->
             </div>
 
             <div class="right">
@@ -100,36 +87,37 @@
                     <i class="material-icons">add</i>
                 </a>
             </div>
+
         </div>
 
 
 
           <!-- Modal Structure -->
         <div id="boxmodal" class="modal bottom-sheet">
-            <div class="modal-content">
-                <form id="box-form">
-                <div class="row">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat right">Cancel</a>
-                    <h4>New Box</h4>
-                    <div class="input-field col s4">
-                        <input id="box_name" type="text" class="validate" name="name" id="box-name">
-                        <label for="box_name">Box Name</label>
+            <form class="add-box container section">
+                <div class="modal-content">
+                    <div class="row">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat right">Cancel</a>
+                        <h4>New Box</h4>
+                        <div class="input-field col s4">
+                            <input id="name" type="text" class="validate" name="name">
+                            <label for="box_name">Box Name</label>
+                        </div>
+                        <div class="input-field col s10">
+                            <textarea id="items" type="text" class="materialize-textarea" name="items"></textarea>
+                            <label for="items">Items</label>
+                        </div>
+                        <div class="chip">
+                            Sample Category 1
+                            <i class="close material-icons">close</i>
+                        </div>
                     </div>
-                    <div class="input-field col s10">
-                        <textarea id="items" type="text" class="materialize-textarea" name="items" id="box-items"></textarea>
-                        <label for="items">Items</label>
-                    </div>
-                    <div class="chip">
-                        Sample Category 1
-                        <i class="close material-icons">close</i>
+                <div class="modal-footer">
+                    <div class="input-field center">
+                        <button class="btn-small modal-close"  type="submit">add</div>
                     </div>
                 </div>
-                </form>
-            <div class="modal-footer">
-                <div class="input-field center">
-                    <button class="btn-small modal-close" type="submit" id="box-form">add</div>
-                </div>
-            </div>
+            </form>
         </div>
 
     <!-- Modal Structure -->
