@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <!-- <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/> -->
+
 </head>
 <body class = "brown lighten-4">
 
@@ -68,84 +69,37 @@
     </header>
 
     <main>
-        <div class="container">
+        <!-- <div class="container">
             <div class="row">
                 <div class="chip">
                     Sample Category
                     <i class="close material-icons">close</i>
                 </div>
             </div>
-            <div class = "row">
+            <div class = "row"> -->
 
-                <div class="col l3 m4 s6">
-                    <div class="card hoverable yellow lighten-4">
-                        <div class="card-content blue-grey-text">
-                            <span class="card-title">Sample Box 1</span>
-                            <p class="truncate">Lorem, ipsum dolor sit amet consectetur adipisicing elit. At quod aut officia pariatur magni dolore labore mollitia fugit quo, neque libero architecto corporis rem reprehenderit, cum voluptatem nihil harum eveniet?</p>
-                        </div>
-                        <div class="card-action">
-                            <div class="row">
-                                <a class="tooltipped" data-position="top" data-tooltip="edit"><i class="material-icons teal-text">edit</i></a>
-                                <a class="tooltipped right" data-position="top" data-tooltip="delete"><i class="material-icons teal-text">delete</i></a>
+            <div class="boxes container">
+                <div class="boxes col l3 m4 s6">
+                        <div class="card hoverable yellow lighten-4">
+                            <div class="card-content blue-grey-text">
+                                <span class="card-title">Sample Box 1</span>
+                                <p class="truncate" id="container"></p>
+                            </div>
+                            <div class="card-action">
+                                <div class="row">
+                                    <a class="tooltipped" data-position="top" data-tooltip="edit"><i class="material-icons teal-text">edit</i></a>
+                                    <a class="tooltipped right" data-position="top" data-tooltip="delete"><i class="material-icons teal-text">delete</i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col l3 m4 s6">
-                    <div class="card hoverable yellow lighten-4">
-                        <div class="card-content blue-grey-text">
-                            <span class="card-title">Sample Box 2</span>
-                            <p class="truncate">Lorem, ipsum dolor sit amet consectetur adipisicing elit. At quod aut officia pariatur magni dolore labore mollitia fugit quo, neque libero architecto corporis rem reprehenderit, cum voluptatem nihil harum eveniet?</p>
-                        </div>
-                        <div class="card-action">
-                            <div class="row">
-                                <a class="tooltipped" data-position="top" data-tooltip="edit"><i class="material-icons teal-text">edit</i></a>
-                                <a class="tooltipped right" data-position="top" data-tooltip="delete"><i class="material-icons teal-text">delete</i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col l3 m4 s6">
-                    <div class="card hoverable yellow lighten-4">
-                        <div class="card-content blue-grey-text">
-                            <span class="card-title">Sample Box 3</span>
-                            <p class="truncate">Lorem, ipsum dolor sit amet consectetur adipisicing elit. At quod aut officia pariatur magni dolore labore mollitia fugit quo, neque libero architecto corporis rem reprehenderit, cum voluptatem nihil harum eveniet?</p>
-                        </div>
-                        <div class="card-action">
-                            <div class="row">
-                                <a class="tooltipped" data-position="top" data-tooltip="edit"><i class="material-icons teal-text">edit</i></a>
-                                <a class="tooltipped right" data-position="top" data-tooltip="delete"><i class="material-icons teal-text">delete</i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col l3 m4 s6">
-                    <div class="card  hoverable yellow lighten-4">
-                        <div class="card-content blue-grey-text">
-                            <span class="card-title">Sample Box 4</span>
-                            <p class="truncate">Lorem, ipsum dolor sit amet consectetur adipisicing elit. At quod aut officia pariatur magni dolore labore mollitia fugit quo, neque libero architecto corporis rem reprehenderit, cum voluptatem nihil harum eveniet?</p>
-                        </div>
-                        <div class="card-action">
-                            <div class="row">
-                                <a class="tooltipped" data-position="top" data-tooltip="edit"><i class="material-icons teal-text">edit</i></a>
-                                <a class="tooltipped right" data-position="top" data-tooltip="delete"><i class="material-icons teal-text">delete</i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
-
-                <div class="right">
-                    <a class="btn-floating btn-large add-btn modal-trigger btn tooltipped pulse" href="#boxmodal" data-position="top" data-tooltip="Add a New Box">
-                            <i class="material-icons">add</i>
-                    </a>
-                </div>
-
-
+            <div class="right">
+                <a class="btn-floating btn-large add-btn modal-trigger btn tooltipped pulse" href="#boxmodal" data-position="top" data-tooltip="Add a New Box">
+                    <i class="material-icons">add</i>
+                </a>
+            </div>
         </div>
 
 
@@ -153,29 +107,27 @@
           <!-- Modal Structure -->
         <div id="boxmodal" class="modal bottom-sheet">
             <div class="modal-content">
+                <form id="box-form">
                 <div class="row">
                     <a href="#!" class="modal-close waves-effect waves-green btn-flat right">Cancel</a>
                     <h4>New Box</h4>
                     <div class="input-field col s4">
-                        <input id="box_name" type="text" class="validate">
+                        <input id="box_name" type="text" class="validate" name="name" id="box-name">
                         <label for="box_name">Box Name</label>
                     </div>
                     <div class="input-field col s10">
-                        <textarea id="items" type="text" class="materialize-textarea"></textarea>
+                        <textarea id="items" type="text" class="materialize-textarea" name="items" id="box-items"></textarea>
                         <label for="items">Items</label>
                     </div>
                     <div class="chip">
                         Sample Category 1
                         <i class="close material-icons">close</i>
                     </div>
-                    <div class="chip">
-                        Sample Category 2
-                        <i class="close material-icons">close</i>
-                    </div>
                 </div>
+                </form>
             <div class="modal-footer">
                 <div class="input-field center">
-                    <button class="btn-small modal-close">add</div>
+                    <button class="btn-small modal-close" type="submit" id="box-form">add</div>
                 </div>
             </div>
         </div>
@@ -189,7 +141,7 @@
         </div>
         <div class="modal-footer">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat left">Cancel</a>
-        <button class="modal-close waves-effect waves-green btn right">Save</a>
+        <button class="modal-close waves-effect waves-green btn right" type="submit">Save</a>
         </div>
     </div>
 
@@ -220,48 +172,48 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('#mobile-links');
-        var instances = M.Sidenav.init(elems, {edge: "left"});
-         });
-        
-        $(document).ready(function(){
-            $('.tooltipped').tooltip();
-         });
+            var elems = document.querySelectorAll('#mobile-links');
+            var instances = M.Sidenav.init(elems, {edge: "left"});
+            });
+            
+            $(document).ready(function(){
+                $('.tooltipped').tooltip();
+            });
 
+            let chipsarray = [{
+                tag: 'Kitchen',
+                }, {
+                tag: 'Decorations',
+                }, {
+                tag: 'Automotive',
+                }];
 
-        let chipsarray = [{
-            tag: 'Kitchen',
-            }, {
-            tag: 'Decorations',
-            }, {
-            tag: 'Automotive',
-            }];
-
-        $('.chips').chips();
-        $('.chips-initial').chips({
-            data: [...chipsarray],
+            $('.chips').chips();
+            $('.chips-initial').chips({
+                data: [...chipsarray],
+            });
+            $('.chips-placeholder').chips({
+                placeholder: 'Create Category',
+                secondaryPlaceholder: '+Category',
+            });
+            $('.chips-autocomplete').chips({
+                autocompleteOptions: {
+                data: {
+                    'Kitchen': null,
+                    'Decorations': null,
+                    'Automotive': null
+                },
+                limit: Infinity,
+                minLength: 1
+                }
+            });
+            $(document).ready(function(){
+            $('.modal').modal();
         });
-        $('.chips-placeholder').chips({
-            placeholder: 'Create Category',
-            secondaryPlaceholder: '+Category',
-        });
-        $('.chips-autocomplete').chips({
-            autocompleteOptions: {
-            data: {
-                'Kitchen': null,
-                'Decorations': null,
-                'Automotive': null
-            },
-            limit: Infinity,
-            minLength: 1
-            }
-        });
-
-        $(document).ready(function(){
-        $('.modal').modal();
-        });
-        
-
     </script>
+    <script src="../js/ui.js"></script>
+    <script src="../js/App.js"></script>
+    <script type="module" src="../js/db.js"></script>
+
 </body>
 </html>

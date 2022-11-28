@@ -5,6 +5,7 @@ const assets = [
     "/",
     "/index.html",
     "/js/App.js",
+    "/js/ui.js",
     "/css/app.css",
     "/pages/about.html",
     "/pages/dashboard.html",
@@ -22,11 +23,11 @@ const limitCacheSize = (name, size) => {
     caches.open(name).then((cache) => {
         cache.keys().then((keys) => {
             if(keys.length > size) {
-                cache.delete(keys[0]).then(limitCacheSize(name,size))
+                cache.delete(keys[0]).then(limitCacheSize(name,size));
             }
-        })
-    })
-}
+        });
+    });
+};
 
 self.addEventListener("install", function (event) {
     console.log(`Event fired: ${event.type}`);
