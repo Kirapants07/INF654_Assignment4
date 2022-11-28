@@ -13,7 +13,7 @@ const render = (data, id) => {
                 <div class="card-action">
                     <div class="row">
                         <a class="tooltipped" data-position="top" data-tooltip="edit"><i class="material-icons teal-text">edit</i></a>
-                        <a class="tooltipped right" data-position="top" data-tooltip="delete" data-id="${id}><i class="material-icons teal-text">delete</i></a>
+                        <a class="tooltipped right" data-position="top" data-tooltip="delete" data-id="${id}"><i class="material-icons teal-text">delete</i></a>
                     </div>
                 </div>
             </div>
