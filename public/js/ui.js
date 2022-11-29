@@ -1,5 +1,3 @@
-console.log("ui.js running");
-
 const boxes = document.querySelector(".boxes");
 
 const render = (data, id) => {
@@ -13,7 +11,7 @@ const render = (data, id) => {
                 <div class="card-action">
                     <div class="row">
                         <a class="tooltipped" data-position="top" data-tooltip="edit"><i class="material-icons teal-text">edit</i></a>
-                        <a class="tooltipped right" data-position="top" data-tooltip="delete" data-id="${id}"><i class="material-icons teal-text">delete</i></a>
+                        <a class="tooltipped right" data-position="top" data-tooltip="delete" ><i class="material-icons teal-text" data-id="${id}">delete</i></a>
                     </div>
                 </div>
             </div>
@@ -22,3 +20,9 @@ const render = (data, id) => {
     boxes.innerHTML += html;
 };
 
+
+//remove Box from DOM
+const removeBox = (id) => {
+    const box = document.querySelector(`.boxes[data-id = ${id}]`);
+    box.remove();
+}

@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
-import {getFirestore, collection, getDocs, onSnapshot, addDoc} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+import {getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, doc} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -34,12 +34,12 @@ const unsub = onSnapshot(collection(db, "Box"), (doc) =>{
             render(change.doc.data(), change.doc.id);
         }
         if(change.type === "removed") {
-            //do something
+            removeBox(change.doc.id);
         }
     });
 });
 
-//add new task
+//add new box
 const boxmodal = document.querySelector("form");
 boxmodal.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -54,5 +54,13 @@ boxmodal.addEventListener("submit", (event) => {
     // boxmodal.categories.value="";
 });
 
-//delete task
+//TROUBLESHOOT ME ************************************************************************
+//delete box
+const boxContainer = document.querySelector("#boxes");
+boxContainer.addEventListener("click", (event) => {
+    if (event.target.tagName === 'I') {
+        const id = event.target.getAttribute("data-id");
+        deleteDoc(doc(db, "Box", id));
+    }
+});
 
