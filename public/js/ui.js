@@ -2,7 +2,7 @@ const boxes = document.querySelector(".boxes");
 
 const render = (data, id) => {
     const html = `
-        <div class="col l3 m4 s6">
+        <div class="box col l3 m4 s6" data-id="${id}">
             <div class="card hoverable yellow lighten-4">
                 <div class="card-content blue-grey-text">
                     <span class="card-title">${data.name}</span>
@@ -23,6 +23,7 @@ const render = (data, id) => {
 
 //remove Box from DOM
 const removeBox = (id) => {
-    const box = document.querySelector(`.boxes[data-id = ${id}]`);
+    const box = document.querySelector(`.box[data-id ="${id}"]`);
+    console.log(box);
     box.remove();
 }
