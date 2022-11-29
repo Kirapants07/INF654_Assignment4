@@ -39,6 +39,21 @@ const unsub = onSnapshot(collection(db, "Box"), (doc) =>{
     });
 });
 
+//check for changes to collection and re-render when changes occur
+const unsubCategories = onSnapshot(collection(db, "Categories"), (doc) =>{
+    //console.log(doc.docChanges());
+    doc.docChanges().forEach((change) => {
+        //console.log(change.doc.data(), change.doc.id);
+        if(change.type === "added") {
+            //call render function in ui
+            renderchips(change.doc.data(), change.doc.id);
+        }
+        if(change.type === "removed") {
+            //removeBox(change.doc.id);
+        }
+    });
+});
+
 //add new box
 const boxmodal = document.querySelector("form");
 boxmodal.addEventListener("submit", (event) => {

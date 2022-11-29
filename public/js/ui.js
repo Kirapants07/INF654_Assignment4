@@ -20,6 +20,17 @@ const render = (data, id) => {
     boxes.innerHTML += html;
 };
 
+const chips = document.querySelector(".categories");
+const renderchips = (data, id) => {
+    const html = `
+    <div class="chip">
+        ${data.category_name}
+        <i class="close material-icons" data-id="${id}">close</i>
+    </div>
+    `;
+    chips.innerHTML += html;
+};
+
 
 //remove Box from DOM
 const removeBox = (id) => {
