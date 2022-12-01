@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
-import {getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, doc} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+import {getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, doc, updateDoc, query, where} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -33,12 +33,18 @@ const unsub = onSnapshot(collection(db, "Box"), (doc) =>{
             //call render function in ui
             render(change.doc.data(), change.doc.id);
         }
+        if(change.type === "modified") {
+            //remove old box and re-render
+            removeBox(change.doc.id);
+            render(change.doc.data(), change.doc.id);
+        }
         if(change.type === "removed") {
             removeBox(change.doc.id);
         }
     });
 });
 
+//Categories and chips setup
 //check for changes to collection and re-render when changes occur
 const unsubCategories = onSnapshot(collection(db, "Categories"), (doc) =>{
     //console.log(doc.docChanges());
@@ -46,6 +52,7 @@ const unsubCategories = onSnapshot(collection(db, "Categories"), (doc) =>{
         //console.log(change.doc.data(), change.doc.id);
         if(change.type === "added") {
             //call render function in ui
+            //chipsarray.push(change.doc.data());
             renderchips(change.doc.data(), change.doc.id);
         }
         if(change.type === "removed") {
@@ -54,8 +61,9 @@ const unsubCategories = onSnapshot(collection(db, "Categories"), (doc) =>{
     });
 });
 
+
 //add new box
-const boxmodal = document.querySelector("form");
+const boxmodal = document.querySelector(".add-box");
 boxmodal.addEventListener("submit", (event) => {
     event.preventDefault();
     addDoc(collection(db, "Box"), {
@@ -69,11 +77,37 @@ boxmodal.addEventListener("submit", (event) => {
     // boxmodal.categories.value="";
 });
 
-//TROUBLESHOOT ME ************************************************************************
+// //update existing box
+const editboxmodal = document.querySelector(".edit-box");
+editboxmodal.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const id = event.target.getAttribute("data-id");
+    console.log(id);
+    const upDoc = doc(db, "Box", id);
+    updateDoc(upDoc, {
+        name: editboxmodal.name.value,
+        items: editboxmodal.items.value,
+    }).catch((error) => console.log(error));
+    //clear text fields
+    editboxmodal.name.value="";
+    editboxmodal.items.value="";
+    // editboxmodal.categories.value="";
+});
+
+//update box
+const fillBoxFields = document.querySelector("#boxes");
+fillBoxFields.addEventListener("click", (event) => {
+    if (event.target.textContent === 'edit') {
+        const id = event.target.getAttribute("data-id");
+        editboxmodal.name.value= event.target.getAttribute("boxname");
+        editboxmodal.items.value= event.target.getAttribute("items");
+    }
+});
+
 //delete box
 const boxContainer = document.querySelector("#boxes");
 boxContainer.addEventListener("click", (event) => {
-    if (event.target.tagName === 'I') {
+    if (event.target.textContent === 'delete') {
         const id = event.target.getAttribute("data-id");
         deleteDoc(doc(db, "Box", id));
     }

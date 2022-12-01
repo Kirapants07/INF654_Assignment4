@@ -23,7 +23,7 @@
 
     <header>
         <div class="navbar-fixed">
-            <nav class="nav-wrapper blue lighten-2">
+            <nav class="blue lighten-2">
                 <div class="container">
                     <a href="../index.html" class="brand-logo">Box Keeper</a>
                     <a href="#" class="sidenav-trigger" data-target="mobile-links">
@@ -32,17 +32,14 @@
                     <ul class="right hide-on-med-and-down">
                         <li><a class="waves-effect waves-light btn modal-trigger" data-target="categories">Categories <i class="material-icons right">add</i></a></li>
                         <li>   
-                            <div class="center row">
-                                <div class="col s12 " >
-                                    <div class="row" id="topbarsearch">
-                                        <div class="input-field col s6 s12 white-text">
-                                            <i class="white-text material-icons prefix">search</i>
-                                            <input type="text" placeholder="search items" id="autocomplete-input" class="autocomplete white-text">
-                                        </div>
-                                    </div>
+                            <form>
+                                <div class="input-field">
+                                    <input id="search" type="search" required class="autocomplete">
+                                    <label for="search"><i class="material-icons">search</i></label>
+                                    <i class="material-icons">close</i>
                                 </div>
-                            </div>          
-                        </li>         
+                            </form>
+                        </li>       
                         <li><a href="../index.html">Home</a></li>
                         <li class="active"><a href="dashboard.html">Dashboard</a></li>
                         <li><a href="login.html">Log In</a></li>
@@ -58,51 +55,35 @@
             <div class="divider"></div>
             <li><a class="waves-effect waves-light btn modal-trigger" data-target="categories">Categories <i class="material-icons right">add</i></a></li>
             <li>   
-                <div class="row" id="topbarsearch">
-                    <div class="input-field col s12 teal-text">
-                        <i class="teal-text material-icons prefix">search</i>
-                        <input type="text" placeholder="search items" id="autocomplete-input" class="autocomplete teal-text">
+                <form>
+                    <div class="input-field">
+                        <input id="search" type="search" required class="autocomplete">
+                        <label for="search"><i class="material-icons">search</i></label>
                     </div>
-                </div>
+                </form>
             </li> 
         </ul>
     </header>
 
     <main>
         <div class="container">
-            
             <div class="categories row">
                 <!-- Categories chips populate here -->
             </div>
             <div class = "row">
-
-             <div class="boxes container" id="boxes">
-                <!-- Boxes populate here -->
+                <div class="boxes container" id="boxes">
+                    <!-- Boxes populate here -->
+                </div>
             </div>
-<!-- 
-            <div class="boxes container">
-                <div class="card-panel box white row">
-                    <div class="box-detail">
-                        <div class="box-title">Box</div>
-                        <div class="box-description">description</div>
-                    </div>
-                </div>
-                <div class="box-delete">
-                    <i class="material-icons">delete_outline</i>
-                </div>
-            </div> -->
-
             <div class="right">
                 <a class="btn-floating btn-large add-btn modal-trigger btn tooltipped pulse" href="#boxmodal" data-position="top" data-tooltip="Add a New Box">
                     <i class="material-icons">add</i>
                 </a>
             </div>
-
         </div>
 
 
-
-          <!-- Modal Structure -->
+        <!-- Modal Structure for adding new box -->
         <div id="boxmodal" class="modal bottom-sheet">
             <form class="add-box container section">
                 <div class="modal-content">
@@ -110,11 +91,11 @@
                         <a href="#!" class="modal-close waves-effect waves-green btn-flat right">Cancel</a>
                         <h4>New Box</h4>
                         <div class="input-field col s4">
-                            <input id="name" type="text" class="validate" name="name">
+                            <input type="text" class="validate" name="name" autofocus="autofocus">
                             <label for="box_name">Box Name</label>
                         </div>
                         <div class="input-field col s10">
-                            <textarea id="items" type="text" class="materialize-textarea" name="items"></textarea>
+                            <textarea type="text" class="materialize-textarea" name="items"></textarea>
                             <label for="items">Items</label>
                         </div>
                         <div class="chip">
@@ -122,23 +103,52 @@
                             <i class="close material-icons">close</i>
                         </div>
                     </div>
+                </div>
                 <div class="modal-footer">
                     <div class="input-field center">
-                        <button class="btn-small modal-close"  type="submit">add</div>
+                        <button class="btn-small modal-close" type="submit">add</button>
                     </div>
                 </div>
             </form>
         </div>
 
-    <!-- Modal Structure -->
+            <!-- Modal Structure for displaying/editing existing box -->
+            <div id="editboxmodal" class="modal">
+                <form class="edit-box container section">
+                    <div class="modal-content">
+                        <div class="row">
+                            <a href="#!" class="modal-close waves-effect waves-green btn-flat right">Cancel</a>
+                            <h4>Edit Box</h4>
+                            <div class="input-field col s4">
+                                <input type="text" class="validate" name="name" id="boxnamefield" autofocus="autofocus">
+                                <label for="box_name">Box Name</label>
+                            </div>
+                            <div class="input-field col s10">
+                                <textarea type="text" class="materialize-textarea" name="items" id="boxitems"></textarea>
+                                <label for="items">Items</label>
+                            </div>
+                            <div class="chip">
+                                Sample Category 1
+                                <i class="close material-icons">close</i>
+                            </div>
+                        </div>
+                    <div class="modal-footer">
+                        <div class="input-field center">
+                            <button class="btn-small modal-close" type="submit">Save</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+    <!-- Modal Structure for adding categories-->
     <div id="categories" class="modal modal-fixed-footer">
         <div class="modal-content">
         <h4>Categories</h4>
-        <div class="chips chips-initial tooltipped" data-position="bottom" data-tooltip="add category"></div>
+        <div class="chips categories chips-initial tooltipped" data-position="bottom" data-tooltip="add category"></div>
         </div>
         <div class="modal-footer">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat left">Cancel</a>
-        <button class="modal-close waves-effect waves-green btn right" type="submit">Save</a>
+        <button class="modal-close waves-effect waves-green btn right" type="submit">Okay</a>
         </div>
     </div>
 
@@ -188,6 +198,12 @@
             $('.chips').chips();
             $('.chips-initial').chips({
                 data: [...chipsarray],
+                onChipAdd: function(e) {
+                    console.log("chips added");
+                },
+                onChipDelete: function(e) {
+                    console.log("chips deleted");
+                },
             });
             $('.chips-placeholder').chips({
                 placeholder: 'Create Category',
@@ -204,6 +220,7 @@
                 minLength: 1
                 }
             });
+
             $(document).ready(function(){
             $('.modal').modal();
         });
