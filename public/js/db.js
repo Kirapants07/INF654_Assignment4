@@ -81,8 +81,7 @@ boxmodal.addEventListener("submit", (event) => {
 const editboxmodal = document.querySelector(".edit-box");
 editboxmodal.addEventListener("submit", (event) => {
     event.preventDefault();
-    const id = event.target.getAttribute("data-id");
-    console.log(id);
+    const id = editboxmodal.uniqueid.value;
     const upDoc = doc(db, "Box", id);
     updateDoc(upDoc, {
         name: editboxmodal.name.value,
@@ -98,7 +97,7 @@ editboxmodal.addEventListener("submit", (event) => {
 const fillBoxFields = document.querySelector("#boxes");
 fillBoxFields.addEventListener("click", (event) => {
     if (event.target.textContent === 'edit') {
-        const id = event.target.getAttribute("data-id");
+        editboxmodal.uniqueid.value= event.target.getAttribute("data-id");
         editboxmodal.name.value= event.target.getAttribute("boxname");
         editboxmodal.items.value= event.target.getAttribute("items");
     }

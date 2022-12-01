@@ -10,7 +10,7 @@ const render = (data, id) => {
                 </div>
                 <div class="card-action">
                     <div class="row">
-                        <a class="tooltipped modal-trigger" onClick="editTask(this)" href="#editboxmodal" data-position="top" data-tooltip="edit"><i class="material-icons teal-text" 
+                        <a class="tooltipped modal-trigger" href="#editboxmodal" data-position="top" data-tooltip="edit"><i class="material-icons teal-text" 
                             data-id="${id}" boxname="${data.name}" items="${data.items}" >edit</i></a>
                         <a class="tooltipped right deletebox" data-position="top" data-tooltip="delete" ><i class="material-icons teal-text" data-id="${id}">delete</i></a>
                     </div>
@@ -21,21 +21,6 @@ const render = (data, id) => {
     boxes.innerHTML += html;
 };
 
-let editTask = (e) => {
-    let selectedTask = e.parentElement;
-
-    console.log(selectedTask);
-    let boxnamefield = document.getElementById("boxnamefield");
-    let boxitems = document.getElementById("dateInput");
-
-    // boxnamefield.value = selectedTask.children[0].innerHTML;
-    // boxitems.value = selectedTask.children[1].innerHTML;
-  };
-  
-  let resetForm = () => {
-    boxnamefield.value = "";
-    boxitems.value = "";
-  };
 
 // const renderchips = (data, id) => {
 //     const html = `
