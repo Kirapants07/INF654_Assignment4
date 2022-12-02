@@ -34,7 +34,7 @@
                         <li>   
                             <form>
                                 <div class="input-field">
-                                    <input id="search" type="search" required class="autocomplete">
+                                    <input class="search" type="search" required class="autocomplete">
                                     <label for="search"><i class="material-icons">search</i></label>
                                     <i class="material-icons">close</i>
                                 </div>
@@ -57,7 +57,7 @@
             <li>   
                 <form>
                     <div class="input-field">
-                        <input id="search" type="search" required class="autocomplete">
+                        <input class="search" type="search" required class="autocomplete">
                         <label for="search"><i class="material-icons">search</i></label>
                     </div>
                 </form>
@@ -98,9 +98,11 @@
                             <textarea type="text" class="materialize-textarea" name="items"></textarea>
                             <label for="items">Items</label>
                         </div>
-                        <div class="chip">
-                            Sample Category 1
-                            <i class="close material-icons">close</i>
+                    </div>
+                    <div class="row">
+                        <p>categories</p>
+                        <div class="categories">
+                            <!-- categories populate here -->
                         </div>
                     </div>
                 </div>
@@ -118,8 +120,8 @@
                     <div class="modal-content">
                         <div class="row">
                             <a href="#!" class="modal-close waves-effect waves-green btn-flat right">Cancel</a>
-                            <h4>Edit Box</h4>
-                            <div class="input-field col s4">
+                            <h4>Box</h4>
+                            <div class="input-field hide">
                                 <input type="text" class="validate" name="uniqueid" uniqueid="uniqueid" autofocus="autofocus">
                                 <label for="uniqueid">ID</label>
                             </div>
@@ -131,9 +133,11 @@
                                 <textarea type="text" class="materialize-textarea" name="items" id="boxitems"></textarea>
                                 <label for="items">Items</label>
                             </div>
-                            <div class="chip">
-                                Sample Category 1
-                                <i class="close material-icons">close</i>
+                        </div>
+                        <div class="row">
+                            <p>categories</p>
+                            <div class="categories">
+                                <!-- categories populate here -->
                             </div>
                         </div>
                     <div class="modal-footer">
@@ -148,7 +152,8 @@
     <div id="categories" class="modal modal-fixed-footer">
         <div class="modal-content">
         <h4>Categories</h4>
-        <div class="chips categories chips-initial tooltipped" data-position="bottom" data-tooltip="add category"></div>
+        <div class="categories"></div>
+        <!-- <div class="chips chips-initial tooltipped" data-position="bottom" data-tooltip="add category"></div> -->
         </div>
         <div class="modal-footer">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat left">Cancel</a>

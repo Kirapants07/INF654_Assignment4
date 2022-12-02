@@ -32,9 +32,10 @@ const render = (data, id) => {
 //     chips.innerHTML += html;
 // };
 
-const chips = document.querySelector(".categories");
+const chips = document.querySelectorAll(".categories");
 const renderchips = (data, id) => {
-    const html = `
+    chips.forEach((chip) => {
+        const html = `
         <div class="categories" data-id="${id}">
             <div class="card hoverable gray lighten-4 left">
                 <div class="card-content blue-grey-text">
@@ -45,7 +46,8 @@ const renderchips = (data, id) => {
             </div>
         </div>
     `;
-    chips.innerHTML += html;
+    chip.innerHTML += html;
+    })
 };
 
 
