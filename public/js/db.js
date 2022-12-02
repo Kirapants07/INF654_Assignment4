@@ -42,7 +42,8 @@ searchbar.forEach(bar => {
             currentword = "";
         }
         console.log(currentword);
-        const filteredData = boxArray.filter(box => box.data.items.toLowerCase().includes(currentword));
+        const filteredData = boxArray.filter(box => box.data.items.toLowerCase().includes(currentword) || 
+            box.data.name.toLowerCase().includes(currentword) );
 
         const boxes = document.querySelectorAll(".box");
         boxes.forEach((box) => {
