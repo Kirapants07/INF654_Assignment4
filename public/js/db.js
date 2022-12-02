@@ -61,16 +61,23 @@ const unsub = onSnapshot(boxQuery, (doc) =>{
     doc.docChanges().forEach((change) => {
         if(change.type === "added") {
             //call render function in ui
-            boxArray.push({ data: change.doc.data(), id: change.doc.id });
             render(change.doc.data(), change.doc.id);
+            boxArray.push({ data: change.doc.data(), id: change.doc.id });
         }
         if(change.type === "modified") {
+            //update array
+            boxArray = boxArray.filter(box => box.id != change.doc.id);
+            boxArray.push({ data: change.doc.data(), id: change.doc.id });
+
             //remove old box and re-render
-            console.log(change.doc.id);
             removeBox(change.doc.id);
             render(change.doc.data(), change.doc.id);
         }
         if(change.type === "removed") {
+            //remove box from array
+            boxArray = boxArray.filter(box => box.id != change.doc.id);
+
+            //remove box from display
             removeBox(change.doc.id);
         }
     });
