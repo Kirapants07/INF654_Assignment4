@@ -30,7 +30,7 @@
                         <i class="material-icons">menu</i>
                     </a>
                     <ul class="right hide-on-med-and-down">
-                        <li><a class="waves-effect waves-light btn modal-trigger" href="#newCategoriesModal">Categories <i class="material-icons right">add</i></a></li>
+                        <!-- <li><a class="waves-effect waves-light btn modal-trigger" href="#newCategoriesModal">Categories <i class="material-icons right">add</i></a></li> -->
                         <li>   
                             <form>
                                 <div class="input-field">
@@ -53,7 +53,7 @@
             <li class="active"><a href="dashboard.html">Dashboard</a></li>
             <li><a href="login.html">Log In</a></li>
             <div class="divider"></div>
-            <li><a class="waves-effect waves-light btn modal-trigger" href="#newCategoriesModal">Categories <i class="material-icons right">add</i></a></li>
+            <!-- <li><a class="waves-effect waves-light btn modal-trigger" href="#newCategoriesModal">Categories <i class="material-icons right">add</i></a></li> -->
             <li>   
                 <form>
                     <div class="input-field">
@@ -98,12 +98,19 @@
                             <textarea type="text" class="materialize-textarea" name="items"></textarea>
                             <label for="items">Items</label>
                         </div>
-                    </div>
-                    <div class="row">
-                        <p>categories</p>
-                        <div class="categories">
-                            <!-- categories populate here -->
+                        <div class="input-field col s10">
+                            <textarea type="text" class="materialize-textarea" name="category"></textarea>
+                            <label for="category">Categories</label>
                         </div>
+                    </div>
+                    <div class="row categories">
+                        <!-- <div class="input-field col s12">
+                            <select class="selectcat" multiple>
+                                <option value="" disabled selected>Select Categories</option>
+                            </select>
+                            <label>Select Categories</label>
+                        </div> -->
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -133,13 +140,16 @@
                                 <textarea type="text" class="materialize-textarea" name="items" id="boxitems"></textarea>
                                 <label for="items">Items</label>
                             </div>
+                            <!-- <div class="input-field col s10">
+                                <textarea type="text" class="materialize-textarea" name="categories"></textarea>
+                                <label for="categories">Categories</label>
+                            </div> -->
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <p>categories</p>
                             <div class="categories">
-                                <!-- categories populate here -->
                             </div>
-                        </div>
+                        </div> -->
                     <div class="modal-footer">
                         <div class="input-field center">
                             <button class="btn-small modal-close" type="submit">Save</div>
@@ -149,7 +159,7 @@
             </div>
 
         <!-- Modal Structure for adding categories-->
-        <div id="newCategoriesModal" class="modal">
+        <!-- <div id="newCategoriesModal" class="modal">
             <form class="add-category container section">
                 <div class="modal-content">
                     <div class="row">
@@ -167,7 +177,7 @@
                     </div>
                 </div>
             </form>
-        </div>
+        </div> -->
 
     </main>
 
@@ -199,46 +209,58 @@
             var elems = document.querySelectorAll('#mobile-links');
             var instances = M.Sidenav.init(elems, {edge: "left"});
             });
-            
-            $(document).ready(function(){
-                $('.tooltipped').tooltip();
-            });
 
-            let chipsarray = [{
-                tag: 'Kitchen',
-                }, {
-                tag: 'Decorations',
-                }, {
-                tag: 'Automotive',
-                }];
+        $(document).ready(function(){
+            $('.tooltipped').tooltip();
+        });
 
-            $('.chips').chips();
-            $('.chips-initial').chips({
-                data: [...chipsarray],
-                onChipAdd: function(e) {
-                    console.log("chips added");
-                },
-                onChipDelete: function(e) {
-                    console.log("chips deleted");
-                },
-            });
-            $('.chips-placeholder').chips({
-                placeholder: 'Create Category',
-                secondaryPlaceholder: '+Category',
-            });
-            $('.chips-autocomplete').chips({
-                autocompleteOptions: {
-                data: {
-                    'Kitchen': null,
-                    'Decorations': null,
-                    'Automotive': null
-                },
-                limit: Infinity,
-                minLength: 1
-                }
-            });
+        let chipsarray = [{
+            tag: 'Kitchen',
+            }, {
+            tag: 'Decorations',
+            }, {
+            tag: 'Automotive',
+            }];
 
-            $(document).ready(function(){
+        $('.chips').chips();
+        $('.chips-initial').chips({
+            data: [...chipsarray],
+            onChipAdd: function(e) {
+                console.log("chips added");
+            },
+            onChipDelete: function(e) {
+                console.log("chips deleted");
+            },
+        });
+        $('.chips-placeholder').chips({
+            placeholder: 'Create Category',
+            secondaryPlaceholder: '+Category',
+        });
+        $('.chips-autocomplete').chips({
+            autocompleteOptions: {
+            data: {
+                'Kitchen': null,
+                'Decorations': null,
+                'Automotive': null
+            },
+            limit: Infinity,
+            minLength: 1
+            }
+        });
+
+        //for rendering dynamic options in select element
+        // $(document).ready(function(){
+        //     add_options_to_select();
+        //       $('select').formSelect();
+        //      function add_options_to_select(){
+        //        for (i = 0; i < 10; i++)
+        //        { 
+        //             $('.selectcat').append( '<option value="'+i+'">'+'Option '+i+'</option>' );
+        //        }
+        //      }
+        // });
+
+        $(document).ready(function(){
             $('.modal').modal();
         });
     </script>

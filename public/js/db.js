@@ -92,17 +92,18 @@ searchbar.forEach(bar => {
 });
 
 //check for changes to categories collection and re-render when changes occur
-const unsubCategories = onSnapshot(collection(db, "Categories"), (doc) =>{
-    doc.docChanges().forEach((change) => {
-        if(change.type === "added") {
-            //call render function in ui
-            renderchips(change.doc.data(), change.doc.id);
-        }
-        if(change.type === "removed") {
-            removeCategory(change.doc.id);
-        }
-    });
-});
+// const unsubCategories = onSnapshot(collection(db, "Categories"), (doc) =>{
+//     doc.docChanges().forEach((change) => {
+//         if(change.type === "added") {
+//             //call render function in ui
+//             renderchips(change.doc.data(), change.doc.id);
+//             renderOptions(change.doc.data(), change.doc.id);
+//         }
+//         if(change.type === "removed") {
+//             removeCategory(change.doc.id);
+//         }
+//     });
+// });
 
 //CREATE
 //add new box
@@ -112,22 +113,23 @@ boxmodal.addEventListener("submit", (event) => {
     addDoc(collection(db, "Box"), {
         name: boxmodal.name.value,
         items: boxmodal.items.value,
+        categories: [...boxmodal.category.value.split(',')],
         createdAt: serverTimestamp(),
     }).catch((error) => console.log(error));
     //clear text fields
     boxmodal.reset();
 });
 //add new category
-const categorymodal = document.querySelector(".add-category");
-categorymodal.addEventListener("submit", (event) => {
-    event.preventDefault();
-    addDoc(collection(db, "Categories"), {
-        category_name: categorymodal.category.value,
-        createdAt: serverTimestamp(),
-    }).catch((error) => console.log(error));
-    //clear text fields
-    categorymodal.reset();
-});
+// const categorymodal = document.querySelector(".add-category");
+// categorymodal.addEventListener("submit", (event) => {
+//     event.preventDefault();
+//     addDoc(collection(db, "Categories"), {
+//         category_name: categorymodal.category.value,
+//         createdAt: serverTimestamp(),
+//     }).catch((error) => console.log(error));
+//     //clear text fields
+//     categorymodal.reset();
+// });
 
 //UPDATE
 //populate form fields with existing box info
@@ -137,6 +139,7 @@ fillBoxFields.addEventListener("click", (event) => {
         editboxmodal.uniqueid.value= event.target.getAttribute("data-id");
         editboxmodal.name.value= event.target.getAttribute("boxname");
         editboxmodal.items.value= event.target.getAttribute("items");
+        editboxmodal.categories.value= event.target.getAttribute("categories");
     }
 });
 //update existing box
@@ -148,6 +151,7 @@ editboxmodal.addEventListener("submit", (event) => {
     updateDoc(upDoc, {
         name: editboxmodal.name.value,
         items: editboxmodal.items.value,
+        categories: [...boxmodal.category.value.split(',')],
     }).catch((error) => console.log(error));
     //clear text fields
     editboxmodal.reset();
@@ -167,16 +171,16 @@ boxContainer.addEventListener("click", (event) => {
     }
 });
 //delete Category
-const categoryContainer = document.querySelectorAll(".categories");
-categoryContainer.forEach(category => {
-    category.addEventListener("click", (event) => {
-        if (event.target.textContent === 'close') {
-            //if alert response is yes:
-            if (confirm("Are you sure you want to delete this category? This will remove it from all associated boxes and cannot be undone.")){
-                const id = event.target.getAttribute("data-id");
-                deleteDoc(doc(db, "Categories", id));
-            }
-        }
-    })
-});
+// const categoryContainer = document.querySelectorAll(".categories");
+// categoryContainer.forEach(category => {
+//     category.addEventListener("click", (event) => {
+//         if (event.target.textContent === 'close') {
+//             //if alert response is yes:
+//             if (confirm("Are you sure you want to delete this category? This will remove it from all associated boxes and cannot be undone.")){
+//                 const id = event.target.getAttribute("data-id");
+//                 deleteDoc(doc(db, "Categories", id));
+//             }
+//         }
+//     })
+// });
 

@@ -14,9 +14,9 @@ const assets = [
     "/pages/resetpassword.html",
     "/pages/signup.html",
     "/img/box.jpg",
-    "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js",
-    "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css",
-    "https://fonts.googleapis.com/icon?family=Material+Icons",
+    //"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js",
+    //"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css",
+    //"https://fonts.googleapis.com/icon?family=Material+Icons",
 ];
 
 //Cache size limit
