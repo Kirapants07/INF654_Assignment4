@@ -56,3 +56,8 @@ const removeBox = (id) => {
     const box = document.querySelector(`.box[data-id ="${id}"]`);
     box.remove();
 }
+//remove Category from DOM
+const removeCategory = (id) => {
+    const category = document.querySelector(`.categories[data-id ="${id}"]`);
+    category.remove();
+}

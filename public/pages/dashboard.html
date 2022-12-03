@@ -30,7 +30,7 @@
                         <i class="material-icons">menu</i>
                     </a>
                     <ul class="right hide-on-med-and-down">
-                        <li><a class="waves-effect waves-light btn modal-trigger" data-target="categories">Categories <i class="material-icons right">add</i></a></li>
+                        <li><a class="waves-effect waves-light btn modal-trigger" href="#newCategoriesModal">Categories <i class="material-icons right">add</i></a></li>
                         <li>   
                             <form>
                                 <div class="input-field">
@@ -53,7 +53,7 @@
             <li class="active"><a href="dashboard.html">Dashboard</a></li>
             <li><a href="login.html">Log In</a></li>
             <div class="divider"></div>
-            <li><a class="waves-effect waves-light btn modal-trigger" data-target="categories">Categories <i class="material-icons right">add</i></a></li>
+            <li><a class="waves-effect waves-light btn modal-trigger" href="#newCategoriesModal">Categories <i class="material-icons right">add</i></a></li>
             <li>   
                 <form>
                     <div class="input-field">
@@ -148,18 +148,26 @@
                 </form>
             </div>
 
-    <!-- Modal Structure for adding categories-->
-    <div id="categories" class="modal modal-fixed-footer">
-        <div class="modal-content">
-        <h4>Categories</h4>
-        <div class="categories"></div>
-        <!-- <div class="chips chips-initial tooltipped" data-position="bottom" data-tooltip="add category"></div> -->
+        <!-- Modal Structure for adding categories-->
+        <div id="newCategoriesModal" class="modal">
+            <form class="add-category container section">
+                <div class="modal-content">
+                    <div class="row">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat right">Cancel</a>
+                        <h4>Add New Category</h4>
+                        <div class="input-field">
+                            <input type="text" class="validate" name="category" autofocus="autofocus">
+                            <label for="category">Category</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="input-field center">
+                        <button class="btn-small modal-close waves-effect waves-green" type="submit">Add</button>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat left">Cancel</a>
-        <button class="modal-close waves-effect waves-green btn right" type="submit">Okay</a>
-        </div>
-    </div>
 
     </main>
 

@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
-import {getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, doc, updateDoc, query, where, orderBy, serverTimestamp} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+import {getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, doc, updateDoc, query, orderBy, serverTimestamp, enableIndexedDbPersistence } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,45 +16,34 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-//get data from collection Box
-async function getBoxes(db){
-    const boxesCol = collection(db, "Box");
-    const boxSnapshot = await getDocs(boxesCol);
-    const BoxList = boxSnapshot.docs.map((doc) => doc);
-    return BoxList;
-}
+//syncs Firebase with Chrome database to store query results for offline app use
+// Subsequent queries will use persistence, if it was enabled successfully
+enableIndexedDbPersistence(db)
+  .catch((err) => {
+      if (err.code == 'failed-precondition') {
+          // Multiple tabs open, persistence can only be enabled
+          // in one tab at a a time.
+          console.log("Persistence failed");
+      } else if (err.code == 'unimplemented') {
+          // The current browser does not support all of the
+          // features required to enable persistence
+          console.log("Persistence is not valid");
+      }
+  });
 
-const search = "";
+//READ
+//get data from collection Box
+// async function getBoxes(db){
+//     const boxesCol = collection(db, "Box");
+//     const boxSnapshot = await getDocs(boxesCol);
+//     const BoxList = boxSnapshot.docs.map((doc) => doc);
+//     return BoxList;
+// }
 
 //get all records in Box collection
 const boxCollection = collection(db, "Box");
 //get filtered records in Box collection
 const boxQuery = query(boxCollection, orderBy("name"));
-
-//get searchbar input with each letter
-const searchbar = document.querySelectorAll(".search");
-searchbar.forEach(bar => {
-    bar.addEventListener('keyup', function(e){
-        let currentword = e.target.value.toLowerCase();
-        //if searchbar is not empty
-        if (currentword.length == 0)
-        {
-            currentword = "";
-        }
-        console.log(currentword);
-        const filteredData = boxArray.filter(box => box.data.items.toLowerCase().includes(currentword) || 
-            box.data.name.toLowerCase().includes(currentword) );
-
-        const boxes = document.querySelectorAll(".box");
-        boxes.forEach((box) => {
-            removeBox(box.getAttribute("data-id"));
-        })
-        filteredData.forEach((box) => {
-            render(box.data, box.id);
-            console.log("a box was loaded");
-        })
-    })
-});
 
 let boxArray = [];
 //check for changes to collection and re-render when changes occur
@@ -84,23 +73,38 @@ const unsub = onSnapshot(boxQuery, (doc) =>{
     });
 });
 
-//Categories and chips setup
-//check for changes to collection and re-render when changes occur
+//get searchbar input with each letter
+const searchbar = document.querySelectorAll(".search");
+searchbar.forEach(bar => {
+    bar.addEventListener('keyup', function(e){
+        let currentword = e.target.value.toLowerCase();
+        const filteredData = boxArray.filter(box => box.data.items.toLowerCase().includes(currentword) || 
+            box.data.name.toLowerCase().includes(currentword) );
+
+        const boxes = document.querySelectorAll(".box");
+        boxes.forEach((box) => {
+            removeBox(box.getAttribute("data-id"));
+        })
+        filteredData.forEach((box) => {
+            render(box.data, box.id);
+        })
+    })
+});
+
+//check for changes to categories collection and re-render when changes occur
 const unsubCategories = onSnapshot(collection(db, "Categories"), (doc) =>{
-    //console.log(doc.docChanges());
     doc.docChanges().forEach((change) => {
-        //console.log(change.doc.data(), change.doc.id);
         if(change.type === "added") {
             //call render function in ui
-            //chipsarray.push(change.doc.data());
             renderchips(change.doc.data(), change.doc.id);
         }
         if(change.type === "removed") {
-            //removeBox(change.doc.id);
+            removeCategory(change.doc.id);
         }
     });
 });
 
+//CREATE
 //add new box
 const boxmodal = document.querySelector(".add-box");
 boxmodal.addEventListener("submit", (event) => {
@@ -109,13 +113,33 @@ boxmodal.addEventListener("submit", (event) => {
         name: boxmodal.name.value,
         items: boxmodal.items.value,
         createdAt: serverTimestamp(),
-        // categories: boxmodal.categories.value,
     }).catch((error) => console.log(error));
     //clear text fields
     boxmodal.reset();
 });
+//add new category
+const categorymodal = document.querySelector(".add-category");
+categorymodal.addEventListener("submit", (event) => {
+    event.preventDefault();
+    addDoc(collection(db, "Categories"), {
+        category_name: categorymodal.category.value,
+        createdAt: serverTimestamp(),
+    }).catch((error) => console.log(error));
+    //clear text fields
+    categorymodal.reset();
+});
 
-// //update existing box
+//UPDATE
+//populate form fields with existing box info
+const fillBoxFields = document.querySelector("#boxes");
+fillBoxFields.addEventListener("click", (event) => {
+    if (event.target.textContent === 'edit') {
+        editboxmodal.uniqueid.value= event.target.getAttribute("data-id");
+        editboxmodal.name.value= event.target.getAttribute("boxname");
+        editboxmodal.items.value= event.target.getAttribute("items");
+    }
+});
+//update existing box
 const editboxmodal = document.querySelector(".edit-box");
 editboxmodal.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -129,22 +153,30 @@ editboxmodal.addEventListener("submit", (event) => {
     editboxmodal.reset();
 });
 
-//populate form fields with existing box info
-const fillBoxFields = document.querySelector("#boxes");
-fillBoxFields.addEventListener("click", (event) => {
-    if (event.target.textContent === 'edit') {
-        editboxmodal.uniqueid.value= event.target.getAttribute("data-id");
-        editboxmodal.name.value= event.target.getAttribute("boxname");
-        editboxmodal.items.value= event.target.getAttribute("items");
-    }
-});
 
+//DELETE:
 //delete box
 const boxContainer = document.querySelector("#boxes");
 boxContainer.addEventListener("click", (event) => {
     if (event.target.textContent === 'delete') {
-        const id = event.target.getAttribute("data-id");
-        deleteDoc(doc(db, "Box", id));
+        //if alert response is yes:
+        if (confirm("Are you sure you want to delete this box? This action cannot be undone.")){
+            const id = event.target.getAttribute("data-id");
+            deleteDoc(doc(db, "Box", id));
+        }
     }
+});
+//delete Category
+const categoryContainer = document.querySelectorAll(".categories");
+categoryContainer.forEach(category => {
+    category.addEventListener("click", (event) => {
+        if (event.target.textContent === 'close') {
+            //if alert response is yes:
+            if (confirm("Are you sure you want to delete this category? This will remove it from all associated boxes and cannot be undone.")){
+                const id = event.target.getAttribute("data-id");
+                deleteDoc(doc(db, "Categories", id));
+            }
+        }
+    })
 });
 
